@@ -156,9 +156,9 @@ function HomeScreen() {
         <TextInput
           onChangeText={onChangeChest}
           value={chest}
-          placeholder="Difficulty Swallowing"
+          placeholder="Chest Pain"
         />
-        <FlatButton text='submit' onPress={submit()}
+        <FlatButton text='submit' onPress={submit}
         />
     </View>
   );
