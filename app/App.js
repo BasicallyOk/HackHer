@@ -31,7 +31,7 @@ const firebaseConfig = {
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-let data = {}
+var data;
 
 function HomeScreen() {
   const [gender, onChangeGender] = React.useState('');
@@ -54,21 +54,21 @@ function HomeScreen() {
     data = {
       "instances": [
         {
-          "GENDER": gender,
-          "AGE": parseInt(age),
-          "SMOKING": smoking,
-          "YELLOW_FINGERS": yellow,
-          "ANXIETY": anxiety,
-          "PEER_PRESSURE": pp,
-          "CHRONIC_DISEASE": chronic,
-          "FATIGUE": fatigue,
-          "ALLERGY": allergy,
-          "WHEEZING": wheeze,
-          "ALCOHOL_CONSUMING": alcohol,
-          "COUGHING": coughing,
-          "SHORT_OF_BREATH": breath,
-          "SWALLOWING_DIFFICULTY": swallowing,
-          "CHEST_PAIN": chest
+          GENDER: gender,
+          AGE: parseInt(age),
+          SMOKING: smoking,
+          YELLOW_FINGERS: yellow,
+          ANXIETY: anxiety,
+          PEER_PRESSURE: pp,
+          CHRONIC_DISEASE: chronic,
+          FATIGUE: fatigue,
+          ALLERGY: allergy,
+          WHEEZING: wheeze,
+          ALCOHOL_CONSUMING: alcohol,
+          COUGHING: coughing,
+          SHORT_OF_BREATH: breath,
+          SWALLOWING_DIFFICULTY: swallowing,
+          CHEST_PAIN: chest
         }
       ]
     }
@@ -149,6 +149,11 @@ function HomeScreen() {
           value={swallowing}
           placeholder="Difficulty Swallowing"
         />
+        <TextInput
+          onChangeText={onChangeChest}
+          value={chest}
+          placeholder="Chest Pain"
+        />
         <Button
             onPress={() => submit()}
             title="Submit"
@@ -164,28 +169,16 @@ function useForceUpdate(){
 }
 
 function ProfileScreen() {
-  var url = "https://us-central1-aiplatform.googleapis.com/v1/projects/atomic-router-331320/locations/us-central1/endpoints/8213167141533253632:predict";
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", url);
-    
-  xhr.setRequestHeader("Authorization", "Bearer $(gcloud auth print-access-token)");
-  xhr.setRequestHeader("Content-Type", "application/json");
-    
-  xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        console.log(xhr.status);
-        console.log(xhr.responseText);
-      }};
-    
-  var data = JSON.stringify(data);
-    
-  xhr.send(data);
+  // Hardcode, need to learn HTTP requests and web protocols to implement
+  let response;
+  if (data.instances[0].SMOKING === "TRUE"){
+    response="You should visit a doctor";
+  } else response="You do not require medical attention. However, this should not be treated as the definitive answer, please perform a checkup routinely";
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Gender: { data[0] }</Text>
-        <Text>Age: { data[1] }</Text>
-        <Text>{ xhr.responseText }</Text>
+        <Text>Gender: { data.instances[0].GENDER }</Text>
+        <Text>Age: { data.instances[0].AGE }</Text>
+        <Text>{ response }</Text>
     </View>
 );
 }
