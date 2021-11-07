@@ -1,0 +1,4 @@
+app/env
+app/android/.project
+app/android/.settings/org.eclipse.buildship.core.prefs
+app/android/app/src/main/java/com/app/generated/BasePackageList.java
