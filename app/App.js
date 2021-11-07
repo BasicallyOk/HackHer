@@ -10,6 +10,10 @@ import {Button} from 'react-native-elements/dist/buttons/Button';
 
 import Onboarding from './components/onboarding';
 
+import Swiper from 'react-native-swiper'
+
+import FlatButton from './components/button';
+
 // import firebaseConfig from "./firebase/config.js";
 
 let Firebase;
@@ -32,9 +36,9 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home</Text>
+  return(
+    <View>
+      <FlatButton text='submit' onPress={Alert.alert('You tapped the button')} />
     </View>
   );
 }

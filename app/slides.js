@@ -6,8 +6,8 @@ export default [
     },
     {
         id:'2',
-        title: 'experiment',
-        description: 'something something something '
+        title: 'experiment2',
+        description: 'something something something2 '
     },
 
 ]
