@@ -10,6 +10,10 @@ import {Button} from 'react-native-elements/dist/buttons/Button';
 
 import Onboarding from './components/onboarding';
 
+import Swiper from 'react-native-swiper'
+
+import FlatButton from './components/button';
+
 // import firebaseConfig from "./firebase/config.js";
 
 let Firebase;
@@ -152,11 +156,9 @@ function HomeScreen() {
         <TextInput
           onChangeText={onChangeChest}
           value={chest}
-          placeholder="Chest Pain"
+          placeholder="Difficulty Swallowing"
         />
-        <Button
-            onPress={() => submit()}
-            title="Submit"
+        <FlatButton text='submit' onPress={submit()}
         />
     </View>
   );
