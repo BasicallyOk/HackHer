@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Dimensions, TextInput, Alert } from 'react-native';
+import { Text, View, Dimensions, TextInput, Alert, ScrollView } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -10,8 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Button} from 'react-native-elements/dist/buttons/Button';
 
-import SearchEngine from './components/search-bar.js';
-import RecommendList from './components/recommended-list.js';
+import Onboarding from './components/onboarding';
 
 // import firebaseConfig from "./firebase/config.js";
 
@@ -35,9 +34,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function HomeScreen() {
-  return (
-    <SearchEngine />
-  );
+
 }
 
 function AdventureScreen() {
