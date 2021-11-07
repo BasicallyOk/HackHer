@@ -37,6 +37,12 @@ const windowHeight = Dimensions.get('window').height;
 
 var data;
 
+function postData(url = '') {
+  // Default options are marked with
+  const response = fetch(url, {method: 'GET'})
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
 function HomeScreen() {
   const [gender, onChangeGender] = React.useState('');
   const [age, onChangeAge] = React.useState('');
@@ -55,28 +61,10 @@ function HomeScreen() {
   const [chest, onChangeChest] = React.useState('');
 
   const submit = () => {
-    data = {
-      "instances": [
-        {
-          GENDER: gender,
-          AGE: parseInt(age),
-          SMOKING: smoking,
-          YELLOW_FINGERS: yellow,
-          ANXIETY: anxiety,
-          PEER_PRESSURE: pp,
-          CHRONIC_DISEASE: chronic,
-          FATIGUE: fatigue,
-          ALLERGY: allergy,
-          WHEEZING: wheeze,
-          ALCOHOL_CONSUMING: alcohol,
-          COUGHING: coughing,
-          SHORT_OF_BREATH: breath,
-          SWALLOWING_DIFFICULTY: swallowing,
-          CHEST_PAIN: chest
-        }
-      ]
-    }
-    Alert.alert("Data recorded")
+    let url=`http://127.0.0.1:5000/api?GENDER=${gender}&AGE=${age}&SMOKING=${smoking}&YELLOW_FINGERS=${yellow}&ANXIETY=${anxiety}&PEER_PRESSURE=${pp}&CHRONIC_DISEASE=${chronic}&FATIGUE=${fatigue}&ALLERGY=${allergy}&WHEEZING=${wheeze}&ALCOHOL_CONSUMING=${alcohol}&COUGHING=${coughing}&SHORTNESS_OF_BREATH=${breath}&SWALLOWING_DIFFICULTY=${swallowing}&CHEST_PAIN=${chest}`
+    data = postData(url)
+    Alert.alert('Data Recorded')
+    console.log('Something')
 }
 
   return (
@@ -170,16 +158,16 @@ function useForceUpdate(){
   return () => setValue(value => value + 1); // update the state to force render
 }
 
+
+
 function ProfileScreen() {
   // Hardcode, need to learn HTTP requests and web protocols to implement
   let response;
-  if (data.instances[0].SMOKING === "TRUE"){
+  if (data.TRUE>=data.FALSE){
     response="You should visit a doctor";
   } else response="You do not require medical attention. However, this should not be treated as the definitive answer, please perform a checkup routinely";
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Gender: { data.instances[0].GENDER }</Text>
-        <Text>Age: { data.instances[0].AGE }</Text>
         <Text>{ response }</Text>
     </View>
 );
